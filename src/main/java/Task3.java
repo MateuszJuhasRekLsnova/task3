@@ -4,8 +4,12 @@ import java.util.Scanner;
 
 public class Task3 {
     public static void main(String[] args) {
+        GraphCreator graphCreator = new GraphCreator();
         List<PairOfNumbers> pairsOfNums = getDatFromInput();
-
+        for (PairOfNumbers pair : pairsOfNums) {
+            graphCreator.addVerticesToGraphs(pair.getFirstNumber(), pair.getSecondNumber());
+        }
+        System.out.println(graphCreator.getGraphs().size());
     }
 
     private static List<PairOfNumbers> getDatFromInput() {

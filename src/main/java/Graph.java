@@ -20,4 +20,12 @@ public class Graph {
     public void setVertices(Set<Integer> vertices) {
         this.vertices = vertices;
     }
+
+    public boolean contains(int firsNum) {
+        return vertices.contains(firsNum);
+    }
+    
+    public void addVertex(int vertex){
+        vertices.add(vertex);
+    }
 }
