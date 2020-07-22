@@ -13,22 +13,20 @@ public class GraphsHolder {
         graphs.add(createGraphWithPairOfNumbers(pairsOfNumbers.get(0)));
         pairsOfNumbers.remove(0);
         for (PairOfNumbers pair : pairsOfNumbers) {
-            int graph1Index = -1;
-            int graph2Index = -1;
             int i =0;
+            List<Integer> graphsIndexes = new LinkedList<>();
             for (GraphImpl<Integer> graph : graphs) {
-                if(graph.containsValue(pair.getFirstNumber())){
-                    graph1Index = i;
-                }
-                if(graph.containsValue(pair.getSecondNumber())){
-                    graph2Index = i;
-                }
-                if(graph1Index!=-1 && graph2Index!= -1){
-                    break;
+                if(graph.addEdgeIfPossible(pair.getFirstNumber(), pair.getSecondNumber())){
+                    graphsIndexes.add(i);
                 }
                 i++;
             }
-            addPairToGraphs(graph1Index, graph2Index, pair);
+            if(graphsIndexes.size()==0){
+                graphs.add(createGraphWithPairOfNumbers(pair));
+            }
+            if(graphsIndexes.size()>1){
+                mergeGraphsByPair(graphsIndexes.get(0), graphsIndexes.get(1), pair);
+            }
         }
     }
 
